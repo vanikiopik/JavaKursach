@@ -48,7 +48,7 @@ public class ServerTask implements  Runnable{
 
                     continue;
                 }
-                if(!Arrays.equals(password, user.getPassword().getBytes())){
+                if(!Arrays.equals(password, user.getPassword())){
                     ostream.writeObject("wrong");
                     System.out.println("WrongP");
                     ostream.flush();

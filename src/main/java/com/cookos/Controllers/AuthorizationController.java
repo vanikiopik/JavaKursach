@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -99,10 +100,13 @@ public class AuthorizationController {
                     try {
                         FXMLAdditional.setRoot("Registration");
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
                 });
             }
-        });
+            Platform.runLater(() ->{
+                System.out.println("asdasd");
+            });
+        }).start();
     }
 }

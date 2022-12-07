@@ -1,22 +1,23 @@
 package com.cookos.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
 @Data
 @Entity
+@Builder
 @Table(name = "user")
 public class User implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int UserID;
 
     private String login;
 
-    private String password;
+    private byte[] password;
 
     private String userName;
 
@@ -28,7 +29,7 @@ public class User implements Serializable {
 
     private int isAdmin;
 
-    public User(int userID, String login, String password,
+    public User(int userID, String login, byte[] password,
                 String userName, String userSurname,
                 String userPhoneNum, String userCity, int isAdmin) {
         this.UserID = userID;

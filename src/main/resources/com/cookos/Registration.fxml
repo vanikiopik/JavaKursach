@@ -16,7 +16,7 @@
             </font>
         </Text>
         <TextField fx:id="nameTextBlock" layoutX="248.0" layoutY="172.0" promptText="Name" />
-        <Button fx:id="RegisterButton" layoutX="268.0" layoutY="397.0" mnemonicParsing="false" text="Register">
+        <Button fx:id="RegisterButton" layoutX="268.0" layoutY="397.0" mnemonicParsing="false" onAction="#register" text="Register">
             <font>
                 <Font size="20.0" />
             </font>

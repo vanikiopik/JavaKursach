@@ -7,7 +7,7 @@ version="2.0">
     <class>com.cookos.Entities.User</class>
     <properties>
         <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="jakarta.persistence.jdbc.url"  value="jdbc:mysql://localhost"/>
+        <property name="jakarta.persistence.jdbc.url"  value="jdbc:mysql://localhost/stock"/>
         <property name="jakarta.persistence.jdbc.user" value="root"/>       
         <property name="jakarta.persistence.jdbc.password" value="datode14"/>
     </properties>

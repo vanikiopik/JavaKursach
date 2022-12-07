@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cookos.Controllers.RegistrationController">
+    <children>
+        <TextField fx:id="surnameTextBlock" layoutX="248.0" layoutY="204.0" promptText="Surname" />
+        <Text layoutX="236.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
+            <font>
+                <Font size="42.0" />
+            </font>
+        </Text>
+        <TextField fx:id="nameTextBlock" layoutX="248.0" layoutY="172.0" promptText="Name" />
+        <Button fx:id="RegisterButton" layoutX="268.0" layoutY="397.0" mnemonicParsing="false" text="Register">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Text layoutX="279.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your data" />
+      <TextField fx:id="numberBlock" layoutX="248.0" layoutY="274.0" promptText="Telephone number" />
+      <TextField fx:id="loginTextBlock" layoutX="248.0" layoutY="308.0" promptText="Login" />
+      <TextField fx:id="passwordTextBlock" layoutX="248.0" layoutY="347.0" promptText="Password" />
+      <Text fill="RED" layoutX="229.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+         <font>
+            <Font name="Bauhaus 93" size="30.0" />
+         </font>
+      </Text>
+      <Text fill="RED" layoutX="228.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+         <font>
+            <Font name="Bauhaus 93" size="30.0" />
+         </font>
+      </Text>
+      <Text fill="RED" layoutX="229.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+         <font>
+            <Font name="Bauhaus 93" size="30.0" />
+         </font>
+      </Text>
+      <Text fill="RED" layoutX="229.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+         <font>
+            <Font name="Bauhaus 93" size="30.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="comboBox" layoutX="247.0" layoutY="240.0" prefWidth="150.0" promptText="City" visibleRowCount="4" />
+    </children>
+</AnchorPane>

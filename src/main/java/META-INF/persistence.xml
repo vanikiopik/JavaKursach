@@ -4,9 +4,10 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
 version="2.0">
 <persistence-unit name="ZAVOD">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <properties>       
-        <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>       
-        <property name="jakarta.persistence.jdbc.url"  value="jdbc:mysql://localhost/stocl"/>
+    <class>com.cookos.Entities.User</class>
+    <properties>
+        <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="jakarta.persistence.jdbc.url"  value="jdbc:mysql://localhost"/>
         <property name="jakarta.persistence.jdbc.user" value="root"/>       
         <property name="jakarta.persistence.jdbc.password" value="datode14"/>
     </properties>

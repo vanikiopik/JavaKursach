@@ -8,10 +8,7 @@ module com.cookos {
     requires org.apache.logging.log4j;
 
     opens com.cookos to javafx.fxml;
-    opens com.cookos.gui.controllers to javafx.fxml;
-    opens com.cookos.model to org.hibernate.orm.core;
+    opens com.cookos.Controllers to javafx.fxml;
     exports com.cookos;
-    exports com.cookos.gui.controllers;
-    exports com.cookos.Entities;
-    opens com.cookos.Entities to javafx.fxml;
+    exports com.cookos.Controllers;
 }

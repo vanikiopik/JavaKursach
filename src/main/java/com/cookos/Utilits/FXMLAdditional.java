@@ -1,6 +1,6 @@
 package com.cookos.Utilits;
 
-import com.example.kursa.Client;
+import com.cookos.Client;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 

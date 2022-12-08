@@ -81,6 +81,7 @@ public class AuthorizationController {
 
     public void submit() throws IOException, NoSuchAlgorithmException {
         Client.ostream.writeObject("LoginAttempt");
+        Client.ostream.flush();
 
         Client.ostream.writeObject(loginField.getText());
         Client.ostream.flush();
@@ -110,7 +111,7 @@ public class AuthorizationController {
             }
             wrongInputText.setVisible(true);
             Platform.runLater(() ->{
-                System.out.println("asdasd");
+                System.out.println("Try again");
             });
         }).start();
     }

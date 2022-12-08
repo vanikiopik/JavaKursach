@@ -13,7 +13,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int UserID;
+    private int userID;
 
     private String login;
 
@@ -30,7 +30,7 @@ public class User implements Serializable {
     public User(int Id, String login, byte[] password,
                 String userName, String userSurname,
                  String userCity, int isAdmin) {
-        this.UserID = Id;
+        this.userID = Id;
         this.login = login;
         this.password = password;
         this.userName = userName;
@@ -39,8 +39,18 @@ public class User implements Serializable {
         this.isAdmin = isAdmin;
     }
 
-
     public User() {
+        
+    }
 
+    public User(String login, byte[] password, String userName,
+                String userSurname, String userCity,
+                int isAdmin) {
+        this.login = login;
+        this.password = password;
+        this.userName = userName;
+        this.userSurname = userSurname;
+        this.userCity = userCity;
+        this.isAdmin = isAdmin;
     }
 }

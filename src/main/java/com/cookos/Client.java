@@ -10,7 +10,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-
 public class Client extends Application {
     public static Socket socket = null;
 
@@ -22,7 +21,7 @@ public class Client extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Client.class.getResource("Authorization.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+        scene = new Scene(fxmlLoader.load(), 640, 480);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
@@ -39,7 +38,6 @@ public class Client extends Application {
             }
         });
         loadingThread.start();
-
     }
 
     public static void main(String[] args) {

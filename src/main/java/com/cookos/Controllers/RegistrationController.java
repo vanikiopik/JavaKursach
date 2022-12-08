@@ -59,18 +59,24 @@ public class RegistrationController implements Initializable {
 
         //Checking login for unique
         Client.ostream.writeObject(loginTextBlock.getText());
-        var CallbackMessage =  Client.istream.readObject();
-        if (CallbackMessage == "LoginUsed") {
+        Client.ostream.flush();
+        var CallbackMessage =  (String) Client.istream.readObject();
+        System.out.println("192");
+        if (Objects.equals(CallbackMessage, "LoginUsed")) {
+            System.out.println(CallbackMessage);
             System.out.println("LoginUsed");
             return;
         }
 
 
         Client.ostream.writeObject(nameTextBlock.getText());
+        Client.ostream.flush();
         Client.ostream.writeObject(surnameTextBlock.getText());
+        Client.ostream.flush();
         Client.ostream.writeObject(comboBox.getValue());
+        Client.ostream.flush();
         Client.ostream.writeObject(HashPassword.getHash(passwordTextBlock.getText()));
-
+        Client.ostream.flush();
 
     }
 

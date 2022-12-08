@@ -23,12 +23,18 @@ public class ServerTask implements  Runnable{
 
     @Override
     public void run() {
+        String listener;
         while(true){
-        try {
-            if (Objects.equals(commandListener(), "LoginAttempt")) {
+            try {
+                listener = commandListener();
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+            if (Objects.equals(listener, "LoginAttempt")) {
                 handleLogin();
             }
-            else if (Objects.equals(commandListener(), "RegisterAttempt")) {
+            else if (Objects.equals(listener, "RegisterAttempt")) {
                 handleRegister();
             }
             else
@@ -52,13 +58,16 @@ public class ServerTask implements  Runnable{
         try (var userDao = new DAO<>(User.class)) {
             var user = userDao.findByColumn("login", login);
 
-            if (user == null) {
+            if (user != null) {
                 ostream.writeObject("LoginUsed");
                 System.out.println("LoginUsed");
                 ostream.flush();
                 return;
             }
+            else
+                ostream.writeObject("LoginFree");
         }
+
         var userName = (String)istream.readObject();
         var userSurname = (String)istream.readObject();
         var userCity = (String)istream.readObject();
@@ -66,7 +75,8 @@ public class ServerTask implements  Runnable{
         final int isAdmin = 0;
 
 
-        var user = new User(1,login, password, userName, userSurname, userCity, isAdmin);
+;
+        var user = new User(login, password, userName, userSurname, userCity, isAdmin);
         try (var userDao = new DAO<>(User.class)) {
             userDao.add(user);
         }

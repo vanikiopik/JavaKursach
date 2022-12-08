@@ -75,12 +75,13 @@ public class AuthorizationController {
     @FXML
     void initialize(){
         wrongInputText.setVisible(false);
-        System.out.println("asdasdasdasdasdas");
     }
 
 
+
     public void submit() throws IOException, NoSuchAlgorithmException {
-        System.out.println("asd");
+        Client.ostream.writeObject("LoginAttempt");
+
         Client.ostream.writeObject(loginField.getText());
         Client.ostream.flush();
 
@@ -115,21 +116,13 @@ public class AuthorizationController {
     }
 
     public void registerButton() throws IOException {
-        RegisterButton.getScene().getWindow().hide();
+        Stage stage;
+        Parent root;
+        stage = (Stage) RegisterButton.getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/Registration.fxml")));
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/com/cookos/Registration.fxml"));
-
-        try {
-            loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        //я бы сыграл тебе на гитаре, кружит голову
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        //бесконечный аромааат
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

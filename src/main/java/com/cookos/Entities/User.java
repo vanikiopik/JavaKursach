@@ -23,21 +23,18 @@ public class User implements Serializable {
 
     private String userSurname;
 
-    private String userPhoneNum;
-
     private String userCity;
 
     private int isAdmin;
 
-    public User(int userID, String login, byte[] password,
+    public User(int Id, String login, byte[] password,
                 String userName, String userSurname,
-                String userPhoneNum, String userCity, int isAdmin) {
-        this.UserID = userID;
+                 String userCity, int isAdmin) {
+        this.UserID = Id;
         this.login = login;
         this.password = password;
         this.userName = userName;
         this.userSurname = userSurname;
-        this.userPhoneNum = userPhoneNum;
         this.userCity = userCity;
         this.isAdmin = isAdmin;
     }

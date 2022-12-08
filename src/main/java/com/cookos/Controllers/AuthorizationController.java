@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class AuthorizationController {
     public Button RegisterButton;
     public TextField loginField;
     public TextField passwordField;
+    public Text wrongInputText;
 
     private String answer = null;
 
@@ -70,11 +72,12 @@ public class AuthorizationController {
         });
     }*/
 
-
-
-
-    private void loginUser(String authorLogin, String authorPassword) {
+    @FXML
+    void initialize(){
+        wrongInputText.setVisible(false);
+        System.out.println("asdasdasdasdasdas");
     }
+
 
     public void submit() throws IOException, NoSuchAlgorithmException {
         System.out.println("asd");
@@ -104,9 +107,29 @@ public class AuthorizationController {
                     }
                 });
             }
+            wrongInputText.setVisible(true);
             Platform.runLater(() ->{
                 System.out.println("asdasd");
             });
         }).start();
+    }
+
+    public void registerButton() throws IOException {
+        RegisterButton.getScene().getWindow().hide();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/com/cookos/Registration.fxml"));
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //я бы сыграл тебе на гитаре, кружит голову
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        //бесконечный аромааат
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
     }
 }

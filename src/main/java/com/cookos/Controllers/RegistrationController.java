@@ -45,7 +45,7 @@ public class RegistrationController implements Initializable {
         comboBox.setItems(list);
     }
 
-    public void register(ActionEvent event) {
-        
+    public void register() {
+
     }
 }

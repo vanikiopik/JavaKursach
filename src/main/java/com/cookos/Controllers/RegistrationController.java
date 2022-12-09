@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,8 +27,10 @@ import java.util.ResourceBundle;
 
 public class RegistrationController implements Initializable {
 
+
     public ComboBox<String> comboBox;
     public Button backButton;
+    public Text wrongInputText;
     @FXML
     private Button RegisterButton;
 
@@ -48,42 +51,49 @@ public class RegistrationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        wrongInputText.setVisible(false);
         ObservableList<String> list = FXCollections.observableArrayList("Minsk","Brest", "Grodno", "Mogilev",
                                                                                 "Vitebsk", "Gomel");
         comboBox.setItems(list);
+        comboBox.setValue("None");
     }
 
     public void register() throws IOException, ClassNotFoundException, NoSuchAlgorithmException {
-        Client.ostream.writeObject("RegisterAttempt");
-        Client.ostream.flush();
-
-        //Checking login for unique
-        Client.ostream.writeObject(loginTextBlock.getText());
-        Client.ostream.flush();
-        var CallbackMessage =  (String) Client.istream.readObject();
-        System.out.println("192");
-        if (Objects.equals(CallbackMessage, "LoginUsed")) {
-            System.out.println(CallbackMessage);
-            System.out.println("LoginUsed");
-            return;
+        String city = comboBox.getSelectionModel().getSelectedItem().toString();
+        if(loginTextBlock.getText().isBlank() | passwordTextBlock.getText().isBlank() | Objects.equals(city, "City")) {
+            wrongInputText.setVisible(true);
         }
+        else{
+            Client.ostream.writeObject("RegisterAttempt");
+            Client.ostream.flush();
+
+            //Checking login for unique
+            Client.ostream.writeObject(loginTextBlock.getText());
+            Client.ostream.flush();
+            var CallbackMessage =  (String) Client.istream.readObject();
+            if (Objects.equals(CallbackMessage, "LoginUsed")) {
+                System.out.println(CallbackMessage);
+                System.out.println("LoginUsed");
+                return;
+            }
 
 
-        Client.ostream.writeObject(nameTextBlock.getText());
-        Client.ostream.flush();
-        Client.ostream.writeObject(surnameTextBlock.getText());
-        Client.ostream.flush();
-        Client.ostream.writeObject(comboBox.getValue());
-        Client.ostream.flush();
-        Client.ostream.writeObject(HashPassword.getHash(passwordTextBlock.getText()));
-        Client.ostream.flush();
+            Client.ostream.writeObject(nameTextBlock.getText());
+            Client.ostream.flush();
+            Client.ostream.writeObject(surnameTextBlock.getText());
+            Client.ostream.flush();
+            Client.ostream.writeObject(comboBox.getValue());
+            Client.ostream.flush();
+            Client.ostream.writeObject(HashPassword.getHash(passwordTextBlock.getText()));
+            Client.ostream.flush();
+        }
 
     }
 
     public void returnToLoginMenu() throws IOException {
         Stage stage;
         Parent root;
-        stage =   (Stage) backButton.getScene().getWindow();
+        stage = (Stage) backButton.getScene().getWindow();
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/Authorization.fxml")));
 
         Scene scene = new Scene(root);

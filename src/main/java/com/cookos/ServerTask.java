@@ -75,7 +75,7 @@ public class ServerTask implements  Runnable{
         final int isAdmin = 0;
 
 
-;
+
         var user = new User(login, password, userName, userSurname, userCity, isAdmin);
         try (var userDao = new DAO<>(User.class)) {
             userDao.add(user);

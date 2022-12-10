@@ -93,6 +93,7 @@ public class ServerTask implements  Runnable{
                 var user = userDao.findByColumn("login", login);
 
                 if(user == null){
+
                     ostream.writeObject("wrong");
                     System.out.println("WrongL");
                     ostream.flush();
@@ -105,9 +106,18 @@ public class ServerTask implements  Runnable{
                     ostream.flush();
                     return;
                 }
-                ostream.writeObject("OK");
-                System.out.println("OK");
-                ostream.flush();
+                if(user.getIsAdmin() == 0){
+                    ostream.writeObject("OK");
+                    System.out.println("OK");
+                    ostream.flush();
+                }
+                else{
+                    ostream.writeObject("OK_a");
+                    System.out.println("OK_a");
+                    ostream.flush();
+                }
+
             }
     }
 }
+

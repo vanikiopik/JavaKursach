@@ -24,7 +24,6 @@ public class User implements Serializable {
     private String userSurname;
 
     private String userCity;
-
     private int isAdmin;
 
     public User(int Id, String login, byte[] password,

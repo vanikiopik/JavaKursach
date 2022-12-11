@@ -6,6 +6,6 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cookos.Controllers.ClientMenuController">
    <children>
-      <Button layoutX="42.0" layoutY="55.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="131.0" text="Посмотреть каталог" />
+      <Button fx:id="watchCatalogButton" layoutX="42.0" layoutY="55.0" mnemonicParsing="false" onAction="#onClickWatchCatalog" prefHeight="41.0" prefWidth="131.0" text="Watch catalog" />
    </children>
 </AnchorPane>

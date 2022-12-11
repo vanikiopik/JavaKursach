@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,7 +8,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cookos.Controllers.CatalogController">
    <children>
-      <TableView fx:id="shopTable" prefHeight="288.0" prefWidth="562.0">
+      <TableView fx:id="shopTable" prefHeight="348.0" prefWidth="526.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="134.4000244140625" text="Name" />
           <TableColumn fx:id="typeColumn" prefWidth="152.79998779296875" text="Type" />
@@ -15,5 +16,7 @@
             <TableColumn fx:id="priceColumn" prefWidth="120.00006103515625" text="Price" />
         </columns>
       </TableView>
+      <Button fx:id="backButton" layoutX="545.0" layoutY="26.0" mnemonicParsing="false" onAction="#onBackMenuButtonClick" text="Back" />
+      <Button fx:id="makeOrderButton" layoutX="545.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickOrderButton" text="Make order" />
    </children>
 </AnchorPane>

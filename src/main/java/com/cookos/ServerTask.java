@@ -1,13 +1,19 @@
 package com.cookos;
 
+import com.cookos.Entities.Shop;
 import com.cookos.Entities.User;
 import com.cookos.Patterns.DAO;
+import com.cookos.Utilits.CatalogTask;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class ServerTask implements  Runnable{
@@ -36,6 +42,10 @@ public class ServerTask implements  Runnable{
             }
             else if (Objects.equals(listener, "RegisterAttempt")) {
                 handleRegister();
+            }
+            else if(Objects.equals(listener, "EnteringCatalog")){
+                System.out.println("EnterCatalog");
+                fillShopTables();
             }
             else
                 System.out.println("Listener Error");
@@ -120,5 +130,9 @@ public class ServerTask implements  Runnable{
         }
     }
 
-
+    private void fillShopTables() throws SQLException, IOException, ClassNotFoundException {
+        CatalogTask catalogTask = new CatalogTask();
+        var shopList = (List<Shop>)catalogTask.getTable();
+        ostream.writeObject(shopList);
+    }
 }

@@ -5,10 +5,12 @@ import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.Getter;
 
+import java.io.Serializable;
+
 @Data
 @Getter
 @Entity
-public class Catalog {
+public class Catalog implements Serializable {
     @Id
     private int productID;
 

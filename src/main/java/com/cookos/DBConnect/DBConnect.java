@@ -16,7 +16,7 @@ public class DBConnect {
     public static Connection getConnect() throws ClassNotFoundException, SQLException {
         String connectionString = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME;
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         connection = DriverManager.getConnection(connectionString, USERNAME, PASSWORD);
         return connection;

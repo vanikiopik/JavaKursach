@@ -2,10 +2,25 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cookos.Controllers.ClientMenuController">
    <children>
-      <Button fx:id="watchCatalogButton" layoutX="42.0" layoutY="55.0" mnemonicParsing="false" onAction="#onClickWatchCatalog" prefHeight="41.0" prefWidth="131.0" text="Watch catalog" />
+      <Button fx:id="watchCatalogButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickWatchCatalog" prefHeight="74.0" prefWidth="177.0" text="Watch catalog">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="exitButton" layoutX="14.0" layoutY="319.0" mnemonicParsing="false" onAction="#onClickExitButton" prefHeight="66.0" prefWidth="83.0" text="Exit">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="deliveryPriceButton" layoutX="354.0" layoutY="14.0" mnemonicParsing="false" onAction="#onDeliveryPriceClickButton" prefHeight="74.0" prefWidth="232.0" text="Watch delivery price">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

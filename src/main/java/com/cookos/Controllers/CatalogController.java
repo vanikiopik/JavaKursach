@@ -74,7 +74,6 @@ public class CatalogController {
 
     private void loadDate() throws SQLException, ClassNotFoundException {
         con = DBConnect.getConnect();
-
         refreshTable();
         amountColumn.setCellValueFactory(new PropertyValueFactory<Shop, Integer>("amount"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Shop, String>("productName"));

@@ -21,11 +21,13 @@ public class ServerTask implements  Runnable{
     private ObjectOutputStream ostream;
     private ObjectInputStream istream;
 
+    private int userId = 0;
     public ServerTask(Socket socket) throws IOException{
         ostream = new ObjectOutputStream(socket.getOutputStream());
         ostream.flush();
         istream = new ObjectInputStream(socket.getInputStream());
     }
+
 
     @Override
     public void run() {
@@ -37,16 +39,20 @@ public class ServerTask implements  Runnable{
                 throw new RuntimeException(e);
             }
             try {
+                //Try when login
             if (Objects.equals(listener, "LoginAttempt")) {
                 handleLogin();
             }
+                //Try to register
             else if (Objects.equals(listener, "RegisterAttempt")) {
                 handleRegister();
             }
+                //Enter to catalog panel in ClientMenu
             else if(Objects.equals(listener, "EnteringCatalog")){
                 System.out.println("EnterCatalog");
                 fillShopTables();
             }
+
             else
                 System.out.println("Listener Error");
         } catch (Exception e) {
@@ -93,6 +99,7 @@ public class ServerTask implements  Runnable{
     }
 
     private void handleLogin() throws Exception {
+        userId = -1;
         var login = (String)istream.readObject();
 
         int hashLength = istream.readInt();
@@ -117,6 +124,7 @@ public class ServerTask implements  Runnable{
             }
 
             if(user.getIsAdmin() == 0){
+                userId = user.getUserID();
                 ostream.writeObject("OK");
                 System.out.println("OK");
                 ostream.flush();

@@ -16,7 +16,7 @@
             <TableColumn fx:id="priceColumn" prefWidth="120.00006103515625" text="Price" />
         </columns>
       </TableView>
-      <Button fx:id="backButton" layoutX="545.0" layoutY="26.0" mnemonicParsing="false" onAction="#onBackMenuButtonClick" text="Back" />
-      <Button fx:id="makeOrderButton" layoutX="545.0" layoutY="69.0" mnemonicParsing="false" onAction="#onClickOrderButton" text="Make order" />
+      <Button fx:id="backButton" layoutX="537.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBackMenuButtonClick" text="Back" />
+      <Button fx:id="makeOrderButton" layoutY="360.0" mnemonicParsing="false" onAction="#onClickOrderButton" text="Make order" />
    </children>
 </AnchorPane>

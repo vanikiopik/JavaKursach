@@ -16,13 +16,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class ServerTask implements  Runnable{
+public class ServerTask implements  Runnable {
 
     private ObjectOutputStream ostream;
     private ObjectInputStream istream;
 
     private int userId = 0;
-    public ServerTask(Socket socket) throws IOException{
+
+    public ServerTask(Socket socket) throws IOException {
         ostream = new ObjectOutputStream(socket.getOutputStream());
         ostream.flush();
         istream = new ObjectInputStream(socket.getInputStream());
@@ -32,7 +33,7 @@ public class ServerTask implements  Runnable{
     @Override
     public void run() {
         String listener;
-        while(true){
+        while (true) {
             try {
                 listener = commandListener();
             } catch (IOException | ClassNotFoundException e) {
@@ -40,36 +41,38 @@ public class ServerTask implements  Runnable{
             }
             try {
                 //Try when login
-            if (Objects.equals(listener, "LoginAttempt")) {
-                handleLogin();
-            }
+                if (Objects.equals(listener, "LoginAttempt")) {
+                    handleLogin();
+                }
                 //Try to register
-            else if (Objects.equals(listener, "RegisterAttempt")) {
-                handleRegister();
-            }
+                else if (Objects.equals(listener, "RegisterAttempt")) {
+                    handleRegister();
+                }
                 //Enter to catalog panel in ClientMenu
-            else if(Objects.equals(listener, "EnteringCatalog")){
-                System.out.println("EnterCatalog");
-                fillShopTables();
-            }
-
-            else
-                System.out.println("Listener Error");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
+                else if (Objects.equals(listener, "EnteringCatalog")) {
+                    System.out.println("EnterCatalog");
+                    fillShopTables();
+                }
+                //User enter delivery window
+                else if (Objects.equals(listener, "EnterDeliveryWindow")) {
+                    operateDelivery();
+                } else
+                    System.out.println("Listener Error");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return;
             }
         }
     }
 
     String commandListener() throws IOException, ClassNotFoundException {
-        var choicer = (String)istream.readObject();
+        var choicer = (String) istream.readObject();
         System.out.println(choicer);
         return choicer;
     }
 
     private void handleRegister() throws Exception {
-        var login = (String)istream.readObject();
+        var login = (String) istream.readObject();
 
         try (var userDao = new DAO<>(User.class)) {
             var user = userDao.findByColumn("login", login);
@@ -79,17 +82,15 @@ public class ServerTask implements  Runnable{
                 System.out.println("LoginUsed");
                 ostream.flush();
                 return;
-            }
-            else
+            } else
                 ostream.writeObject("LoginFree");
         }
 
-        var userName = (String)istream.readObject();
-        var userSurname = (String)istream.readObject();
-        var userCity = (String)istream.readObject();
+        var userName = (String) istream.readObject();
+        var userSurname = (String) istream.readObject();
+        var userCity = (String) istream.readObject();
         byte[] password = (byte[]) istream.readObject();
         final int isAdmin = 0;
-
 
 
         var user = new User(login, password, userName, userSurname, userCity, isAdmin);
@@ -100,7 +101,7 @@ public class ServerTask implements  Runnable{
 
     private void handleLogin() throws Exception {
         userId = -1;
-        var login = (String)istream.readObject();
+        var login = (String) istream.readObject();
 
         int hashLength = istream.readInt();
         var password = new byte[hashLength];
@@ -109,27 +110,26 @@ public class ServerTask implements  Runnable{
         try (var userDao = new DAO<>(User.class)) {
             var user = userDao.findByColumn("login", login);
 
-            if(user == null){
+            if (user == null) {
                 ostream.writeObject("wrong");
                 System.out.println("WrongL");
                 ostream.flush();
                 return;
             }
 
-            if(!Arrays.equals(password, user.getPassword())){
+            if (!Arrays.equals(password, user.getPassword())) {
                 ostream.writeObject("wrong");
                 ostream.flush();
                 System.out.println("WrongP");
                 return;
             }
 
-            if(user.getIsAdmin() == 0){
+            if (user.getIsAdmin() == 0) {
                 userId = user.getUserID();
                 ostream.writeObject("OK");
                 System.out.println("OK");
                 ostream.flush();
-            }
-            else{
+            } else {
                 ostream.writeObject("OK_a");
                 System.out.println("OK_a");
                 ostream.flush();
@@ -140,7 +140,21 @@ public class ServerTask implements  Runnable{
 
     private void fillShopTables() throws SQLException, IOException, ClassNotFoundException {
         CatalogTask catalogTask = new CatalogTask();
-        var shopList = (List<Shop>)catalogTask.getTable();
+        var shopList = (List<Shop>) catalogTask.getTable();
         ostream.writeObject(shopList);
+    }
+
+    private void operateDelivery() throws Exception {
+        try (var userDao = new DAO<>(User.class)) {
+            var user = userDao.findByColumn("userID", userId);
+
+            if (user != null) {
+                ostream.writeObject(user.getUserCity());
+                ostream.flush();
+                return;
+            } else
+                ostream.writeObject("UserNotFound");
+
+        }
     }
 }

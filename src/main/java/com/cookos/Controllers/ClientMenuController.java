@@ -13,6 +13,7 @@ import java.util.Objects;
 public class ClientMenuController {
     public Button watchCatalogButton;
     public Button exitButton;
+    public Button deliveryPriceButton;
 
     public void onClickWatchCatalog(ActionEvent event) throws IOException {
         Stage stage;
@@ -34,5 +35,17 @@ public class ClientMenuController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void onDeliveryPriceClickButton(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage = (Stage) exitButton.getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/Delivery.fxml")));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 }

@@ -17,5 +17,10 @@
             <Font size="19.0" />
          </font>
       </Button>
+      <Button fx:id="deliveryPriceButton" layoutX="354.0" layoutY="14.0" mnemonicParsing="false" onAction="#onDeliveryPriceClickButton" prefHeight="74.0" prefWidth="232.0" text="Watch delivery price">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

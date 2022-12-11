@@ -37,84 +37,72 @@ public class AuthorizationController {
     @FXML
     private URL location;
 
-/*    @FXML
-    void initialize() {
-
-        RegisterButton.setOnAction(event -> {
-            RegisterButton.getScene().getWindow().hide();
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/com/cookos/Registration.fxml"));
-
-            try {
-                loader.load();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-        });
-
-        EnterDataButton.setOnAction(event->
-        {
-            String authorLogin = loginField.getText().trim();
-            String authorPassword = passwordField.getText().trim();
-
-            if (!authorLogin.equals("root") | !authorPassword.equals("root")) {
-                loginUser(authorLogin, authorPassword);
-
-            } else {
-                System.out.println("Необходимо заполнить поля");
-            }
-        });
-    }*/
-
     @FXML
     void initialize(){
         wrongInputText.setVisible(false);
     }
 
 
+    public void change_on_client_window(int i) throws IOException, NoSuchAlgorithmException {
 
-    public void submit() throws IOException, NoSuchAlgorithmException {
-        Client.ostream.writeObject("LoginAttempt");
-        Client.ostream.flush();
+        Stage stage;
+        Parent root = null;
+        stage = (Stage) EnterDataButton.getScene().getWindow();
+        if(i == 0) {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/ClientMenu.fxml")));
+        }
+        else if (i == 1){
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/AdminMenu.fxml")));
+        }
 
-        Client.ostream.writeObject(loginField.getText());
-        Client.ostream.flush();
-
-        var hash = HashPassword.getHash(passwordField.getText());
-        Client.ostream.writeInt(hash.length);
-        Client.ostream.flush();
-        Client.ostream.write(hash, 0, hash.length);
-        Client.ostream.flush();
-
-        new Thread(() ->{
-            try {
-                answer = (String)Client.istream.readObject();
-            } catch (ClassNotFoundException | IOException e) {
-                e.printStackTrace();
-                return;
-            }
-
-            if(Objects.equals(answer, "OK")){
-                Platform.runLater(() ->{
-                    try {
-                        FXMLAdditional.setRoot("Registration");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-            wrongInputText.setVisible(true);
-            Platform.runLater(() ->{
-                System.out.println("Try again");
-            });
-        }).start();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
+
+        public void submit() throws IOException, NoSuchAlgorithmException {
+            System.out.println("submit");
+            Client.ostream.writeObject("LoginAttempt");
+            Client.ostream.flush();
+            Client.ostream.writeObject(loginField.getText().trim());
+            Client.ostream.flush();
+
+            var hash = HashPassword.getHash(passwordField.getText().trim());
+            Client.ostream.writeInt(hash.length);
+            Client.ostream.flush();
+            Client.ostream.write(hash, 0, hash.length);
+            Client.ostream.flush();
+
+            new Thread(() ->{
+                try {
+                    answer = (String)Client.istream.readObject();
+                    System.out.println("answer = " + answer);
+                } catch (ClassNotFoundException | IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+
+                if(Objects.equals(answer, "OK")){
+                    Platform.runLater(() ->{
+                        try {
+                            change_on_client_window(0);
+                        } catch (IOException | NoSuchAlgorithmException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                }
+                else if(Objects.equals(answer, "OK_a")){
+                    Platform.runLater(() ->{
+                        try {
+                            change_on_client_window(1);
+                        } catch (IOException | NoSuchAlgorithmException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                }
+                wrongInputText.setVisible(true);
+            }).start();
+        }
 
     public void registerButton() throws IOException {
         Stage stage;

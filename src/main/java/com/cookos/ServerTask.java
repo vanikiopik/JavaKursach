@@ -83,31 +83,42 @@ public class ServerTask implements  Runnable{
     }
 
     private void handleLogin() throws Exception {
-            var login = (String)istream.readObject();
+        var login = (String)istream.readObject();
 
-            int hashLength = istream.readInt();
-            var password = new byte[hashLength];
-            istream.readFully(password);
+        int hashLength = istream.readInt();
+        var password = new byte[hashLength];
+        istream.readFully(password);
 
-            try (var userDao = new DAO<>(User.class)) {
-                var user = userDao.findByColumn("login", login);
+        try (var userDao = new DAO<>(User.class)) {
+            var user = userDao.findByColumn("login", login);
 
-                if(user == null){
-                    ostream.writeObject("wrong");
-                    System.out.println("WrongL");
-                    ostream.flush();
-                    return;
-                }
+            if(user == null){
+                ostream.writeObject("wrong");
+                System.out.println("WrongL");
+                ostream.flush();
+                return;
+            }
 
-                if(!Arrays.equals(password, user.getPassword())){
-                    ostream.writeObject("wrong");
-                    System.out.println("WrongP");
-                    ostream.flush();
-                    return;
-                }
+            if(!Arrays.equals(password, user.getPassword())){
+                ostream.writeObject("wrong");
+                ostream.flush();
+                System.out.println("WrongP");
+                return;
+            }
+
+            if(user.getIsAdmin() == 0){
                 ostream.writeObject("OK");
                 System.out.println("OK");
                 ostream.flush();
             }
+            else{
+                ostream.writeObject("OK_a");
+                System.out.println("OK_a");
+                ostream.flush();
+            }
+
+        }
     }
+
+
 }

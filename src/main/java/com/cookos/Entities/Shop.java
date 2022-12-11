@@ -23,4 +23,5 @@ public class Shop extends Catalog {
     public Shop() {
         super();
     }
+
 }

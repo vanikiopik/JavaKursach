@@ -6,6 +6,7 @@ module com.cookos {
     requires lombok;
     requires org.hibernate.orm.core;
     requires org.apache.logging.log4j;
+    requires mysql.connector.j;
 
 
     opens com.cookos to javafx.fxml;

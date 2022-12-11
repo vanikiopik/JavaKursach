@@ -56,6 +56,10 @@ public class ServerTask implements  Runnable {
                 //User enter delivery window
                 else if (Objects.equals(listener, "EnterDeliveryWindow")) {
                     operateDelivery();
+                }
+                //Opens window to make order
+                else if (Objects.equals(listener, "EnterOrderMenu")) {
+                    operateOrder();
                 } else
                     System.out.println("Listener Error");
             } catch (Exception e) {
@@ -155,6 +159,22 @@ public class ServerTask implements  Runnable {
             } else
                 ostream.writeObject("UserNotFound");
 
+        }
+    }
+
+    private void operateOrder() throws Exception {
+        try (var userDao = new DAO<>(User.class)) {
+            var user = userDao.findByColumn("userID", userId);
+            if (user != null) {
+                ostream.writeObject(user.getUserName());
+                ostream.flush();
+                ostream.writeObject(user.getUserSurname());
+                ostream.flush();
+                ostream.writeObject(user.getUserCity());
+                ostream.flush();
+                return;
+            } else
+                ostream.writeObject("UserNotFound");
         }
     }
 }

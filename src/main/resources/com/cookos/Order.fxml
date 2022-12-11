@@ -14,8 +14,8 @@
             <Font size="42.0" />
          </font>
       </Text>
-      <ComboBox fx:id="typeComboBox" layoutX="54.0" layoutY="76.0" prefWidth="150.0" promptText="Type" />
-      <ComboBox fx:id="nameComboBox" layoutX="54.0" layoutY="139.0" prefWidth="150.0" promptText="Name" />
+      <ComboBox fx:id="typeComboBox" layoutX="54.0" layoutY="76.0" onAction="#typeProductBox" prefWidth="150.0" promptText="Type" />
+      <ComboBox fx:id="nameComboBox" layoutX="54.0" layoutY="139.0" onAction="#nameProductBox" prefWidth="150.0" promptText="Name" />
       <Text layoutX="58.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose type:">
          <font>
             <Font size="16.0" />
@@ -31,11 +31,51 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <ComboBox fx:id="deliveryComboBox" layoutX="54.0" layoutY="200.0" prefWidth="150.0" promptText="Delivery" />
+      <ComboBox fx:id="deliveryComboBox" layoutX="54.0" layoutY="200.0" onAction="#deliveryBox" prefWidth="150.0" promptText="Delivery" />
       <Button fx:id="confirmButton" layoutX="487.0" layoutY="340.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" text="Confirm">
          <font>
             <Font size="21.0" />
          </font>
       </Button>
+      <Text layoutX="314.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="314.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="310.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="314.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="nameText" layoutX="376.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="surnameText" layoutX="376.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="cityText" layoutX="376.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="priceText" layoutX="376.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

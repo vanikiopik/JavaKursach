@@ -104,7 +104,14 @@ public class CatalogController {
         stage.show();
     }
 
-    public void onClickOrderButton(ActionEvent event) {
+    public void onClickOrderButton(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage = (Stage) makeOrderButton.getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/Order.fxml")));
 
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

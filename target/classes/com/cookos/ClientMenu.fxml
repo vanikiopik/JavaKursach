@@ -22,5 +22,10 @@
             <Font size="21.0" />
          </font>
       </Button>
+      <Button fx:id="makeOrderButton" layoutX="15.0" layoutY="108.0" mnemonicParsing="false" onAction="#onMakeOrderButtonClick" text="Make order">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -62,7 +62,12 @@ public class ServerTask implements  Runnable {
                 //Opens window to make order
                 else if (Objects.equals(listener, "EnterOrderMenu")) {
                     operateOrder();
-                } else
+
+                } else if (Objects.equals(listener, "PlaceOrder")) {
+                    placeOrder();
+                }
+
+                    else
                     System.out.println("Listener Error");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -185,5 +190,15 @@ public class ServerTask implements  Runnable {
             } else
                 ostream.writeObject("UserNotFound");
         }
+    }
+
+    private void placeOrder() throws IOException, ClassNotFoundException {
+        var productName = (String)istream.readObject();
+        var finalPrice = (Float)istream.readObject();
+        var deliveryStatus = (String)istream.readObject();
+        System.out.println(productName);
+        System.out.println(finalPrice);
+        System.out.println(deliveryStatus);
+
     }
 }

@@ -2,7 +2,8 @@ package com.cookos.Controllers;
 
 import com.cookos.Client;
 import com.cookos.Entities.Shop;
-import com.mysql.cj.protocol.x.XMessage;
+import com.cookos.Entities.User;
+import com.cookos.Patterns.DAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,7 +41,10 @@ public class OrderController {
 
     ObservableList<String> deliveryList = FXCollections.observableArrayList("Yes" , "No");
 
-    private float totalPrice;
+    private float finalPrice;
+    private String name;
+    private String deliveryStatus;
+
     private float delieveryPrice = 0;
     private float productPrice = 0;
 
@@ -79,7 +83,7 @@ public class OrderController {
 
     }
 
-    public void onConfirmButtonClick(ActionEvent event) {
+    public void onConfirmButtonClick(ActionEvent event) throws IOException {
         if(Objects.equals(nameComboBox.getValue(), "Choose") |
                 Objects.equals(typeComboBox.getValue(), "Choose"))
         {
@@ -87,6 +91,16 @@ public class OrderController {
         }
         else{
             inputErrorText.setVisible(false);
+            Client.ostream.writeObject("PlaceOrder");
+
+            name = nameComboBox.getValue().toString();
+            deliveryStatus = deliveryComboBox.getValue().toString(); // Yes | No
+            //Sending to server name of product,finalPrice, Order status(Yes\No)
+
+            Client.ostream.writeObject(name);
+            Client.ostream.writeObject(finalPrice);
+            Client.ostream.writeObject(deliveryStatus);
+
 
         }
     }
@@ -112,8 +126,8 @@ public class OrderController {
         else if (Objects.equals(deliveryChoice, "No"))
             delieveryPrice = 0;
 
-        totalPrice = productPrice + delieveryPrice;
-        priceText.setText(String.valueOf(totalPrice));
+        finalPrice = productPrice + delieveryPrice;
+        priceText.setText(String.valueOf(finalPrice));
     }
 
     public void typeProductBox(ActionEvent event) {
@@ -125,7 +139,8 @@ public class OrderController {
         for(var s : shopList){
             if(Objects.equals(s.getProductName(), name)) {
                 productPrice = priceProductList.get(i);
-                priceText.setText(String.valueOf(priceProductList.get(i) + delieveryPrice));
+                finalPrice = delieveryPrice + priceProductList.get(i);
+                priceText.setText(String.valueOf(finalPrice));
                 typeText.setText(String.valueOf(typeProductList.get(i)));
             }
             else

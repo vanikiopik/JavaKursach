@@ -197,14 +197,11 @@ public class ServerTask implements  Runnable {
         var deliveryStatus = (String) istream.readObject();
 
 
-        try (var Shop = new DAO<>(Shop.class);
+        try (var shopDAO = new DAO<>(Shop.class);
              var orderDAO = new DAO<>(Order.class);
              var userDAO = new DAO<>(User.class)) {
                  var user = userDAO.findByColumn("userID", userId);
-                 var shop = Shop.findByColumn("productName", productName);
-
-                 System.out.println(shop.toString());
-                 System.out.println(user.toString());
+                 var shop = shopDAO.findByColumn("productName", productName);
 
                  var order = new Order();
                  order.setShop_Catalog_productID(shop);
@@ -212,8 +209,11 @@ public class ServerTask implements  Runnable {
                  order.setFinalPrice(finalPrice);
                  order.setOrderDelivery(deliveryStatus);
                  order.setOrderStatus("Review");
-                 System.out.println(order);
+
                  orderDAO.add(order);
+
+                 shop.setAmount(shop.getAmount() - 1);
+                 shopDAO.update(shop);
              }
         }
     }

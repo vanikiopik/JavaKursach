@@ -18,7 +18,6 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderID;
 
-
     @ManyToOne
     @JoinColumn(name = "User_userID", referencedColumnName = "userID")
     private User User_userID;

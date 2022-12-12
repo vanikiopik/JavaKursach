@@ -3,6 +3,7 @@ package com.cookos.Entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 
 @Getter
 @Entity
+@Setter
 @ToString(callSuper = true)
 @PrimaryKeyJoinColumn(name = "Catalog_productID")
 public class Shop extends Catalog implements Serializable {

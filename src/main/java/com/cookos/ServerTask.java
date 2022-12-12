@@ -1,11 +1,12 @@
 package com.cookos;
 
+import com.cookos.Entities.Catalog;
+import com.cookos.Entities.Order;
 import com.cookos.Entities.Shop;
 import com.cookos.Entities.User;
 import com.cookos.Patterns.DAO;
 import com.cookos.Utilits.CatalogTask;
 import com.cookos.Utilits.OrderTask;
-import jakarta.persistence.criteria.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -65,9 +66,7 @@ public class ServerTask implements  Runnable {
 
                 } else if (Objects.equals(listener, "PlaceOrder")) {
                     placeOrder();
-                }
-
-                    else
+                } else
                     System.out.println("Listener Error");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -192,13 +191,29 @@ public class ServerTask implements  Runnable {
         }
     }
 
-    private void placeOrder() throws IOException, ClassNotFoundException {
-        var productName = (String)istream.readObject();
-        var finalPrice = (Float)istream.readObject();
-        var deliveryStatus = (String)istream.readObject();
-        System.out.println(productName);
-        System.out.println(finalPrice);
-        System.out.println(deliveryStatus);
+    private void placeOrder() throws Exception {
+        var productName = (String) istream.readObject();
+        var finalPrice = (Float) istream.readObject();
+        var deliveryStatus = (String) istream.readObject();
 
+
+        try (var Shop = new DAO<>(Shop.class);
+             var orderDAO = new DAO<>(Order.class);
+             var userDAO = new DAO<>(User.class)) {
+                 var user = userDAO.findByColumn("userID", userId);
+                 var shop = Shop.findByColumn("productName", productName);
+
+                 System.out.println(shop.toString());
+                 System.out.println(user.toString());
+
+                 var order = new Order();
+                 order.setShop_Catalog_productID(shop);
+                 order.setUser_userID(user);
+                 order.setFinalPrice(finalPrice);
+                 order.setOrderDelivery(deliveryStatus);
+                 order.setOrderStatus("Review");
+                 System.out.println(order);
+                 orderDAO.add(order);
+             }
+        }
     }
-}

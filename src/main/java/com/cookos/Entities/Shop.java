@@ -1,19 +1,23 @@
 package com.cookos.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serializable;
 
-@Data
+
 @Getter
 @Entity
+@ToString(callSuper = true)
+@PrimaryKeyJoinColumn(name = "Catalog_productID")
 public class Shop extends Catalog implements Serializable {
 
+    @Column(name = "price")
     private float price;
 
+    @Column(name = "amount")
     private int amount;
 
     public Shop(String productName, String productType, float price, int amount) {

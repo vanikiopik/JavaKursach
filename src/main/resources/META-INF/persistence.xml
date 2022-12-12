@@ -10,6 +10,7 @@ version="2.0">
         <property name="jakarta.persistence.jdbc.url"  value="jdbc:mysql://localhost/stock"/>
         <property name="jakarta.persistence.jdbc.user" value="root"/>       
         <property name="jakarta.persistence.jdbc.password" value="datode14"/>
+        <property name="hibernate.show_sql" value="true"/>
     </properties>
 </persistence-unit>
 </persistence>

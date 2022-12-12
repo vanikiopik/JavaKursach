@@ -98,8 +98,11 @@ public class OrderController {
             //Sending to server name of product,finalPrice, Order status(Yes\No)
 
             Client.ostream.writeObject(name);
+            Client.ostream.flush();
             Client.ostream.writeObject(finalPrice);
+            Client.ostream.flush();
             Client.ostream.writeObject(deliveryStatus);
+            Client.ostream.flush();
 
 
         }

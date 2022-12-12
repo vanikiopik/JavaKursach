@@ -30,6 +30,7 @@ public class OrderController {
     public Text nameText;
     public Text typeText;
     public Button backButton;
+    public Text inputErrorText;
 
     private ObservableList<Shop> shopList = FXCollections.observableArrayList();
 
@@ -46,10 +47,13 @@ public class OrderController {
 
     @FXML
     private void initialize() throws IOException, ClassNotFoundException {
+        inputErrorText.setVisible(false);
         Client.ostream.writeObject("EnterOrderMenu");
 
         deliveryComboBox.setItems(deliveryList);
         deliveryComboBox.setValue("Choose");
+
+        nameComboBox.setValue("Choose");
 
         var name = (String)Client.istream.readObject();
         if (Objects.equals(name, "UserNotFound"))
@@ -76,7 +80,15 @@ public class OrderController {
     }
 
     public void onConfirmButtonClick(ActionEvent event) {
+        if(Objects.equals(nameComboBox.getValue(), "Choose") |
+                Objects.equals(typeComboBox.getValue(), "Choose"))
+        {
+            inputErrorText.setVisible(true);
+        }
+        else{
+            inputErrorText.setVisible(false);
 
+        }
     }
 
     public void deliveryBox(ActionEvent event) {

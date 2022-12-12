@@ -91,5 +91,10 @@
             <Font size="21.0" />
          </font>
       </Button>
+      <Text fx:id="inputErrorText" layoutX="300.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose product and delivery type">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

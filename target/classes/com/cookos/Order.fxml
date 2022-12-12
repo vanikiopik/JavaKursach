@@ -6,7 +6,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cookos.Controllers.OrderController">
    <children>
       <Text layoutX="246.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order">
@@ -14,24 +13,24 @@
             <Font size="42.0" />
          </font>
       </Text>
-      <ComboBox fx:id="typeComboBox" layoutX="54.0" layoutY="76.0" onAction="#typeProductBox" prefWidth="150.0" promptText="Type" />
-      <ComboBox fx:id="nameComboBox" layoutX="54.0" layoutY="139.0" onAction="#nameProductBox" prefWidth="150.0" promptText="Name" />
-      <Text layoutX="58.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose type:">
+      <ComboBox fx:id="typeComboBox" layoutX="54.0" layoutY="78.0" onAction="#typeProductBox" prefWidth="150.0" promptText="Type" visible="false" />
+      <ComboBox fx:id="nameComboBox" layoutX="54.0" layoutY="100.0" onAction="#nameProductBox" prefWidth="150.0" promptText="Name" />
+      <Text layoutX="58.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose type:" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="58.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose name:">
+      <Text layoutX="58.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose product:">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="58.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery">
+      <Text layoutX="58.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <ComboBox fx:id="deliveryComboBox" layoutX="54.0" layoutY="200.0" onAction="#deliveryBox" prefWidth="150.0" promptText="Delivery" />
+      <ComboBox fx:id="deliveryComboBox" layoutX="54.0" layoutY="176.0" onAction="#deliveryBox" prefWidth="150.0" promptText="Delivery" />
       <Button fx:id="confirmButton" layoutX="487.0" layoutY="340.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" text="Confirm">
          <font>
             <Font size="21.0" />
@@ -47,7 +46,7 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="310.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:">
+      <Text layoutX="316.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total price:">
          <font>
             <Font size="15.0" />
          </font>
@@ -57,25 +56,40 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="nameText" layoutX="376.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
+      <Text fx:id="nameText" layoutX="410.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="surnameText" layoutX="376.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
+      <Text fx:id="surnameText" layoutX="410.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="cityText" layoutX="376.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
+      <Text fx:id="cityText" layoutX="410.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="priceText" layoutX="376.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
+      <Text fx:id="priceText" layoutX="410.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
+      <Text layoutX="317.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="typeText" layoutX="410.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="91.65625">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Button fx:id="backButton" layoutX="32.0" layoutY="340.0" mnemonicParsing="false" onAction="#onBackButtonClick" text="Back">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

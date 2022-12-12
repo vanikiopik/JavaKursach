@@ -4,6 +4,8 @@ import com.cookos.Entities.Shop;
 import com.cookos.Entities.User;
 import com.cookos.Patterns.DAO;
 import com.cookos.Utilits.CatalogTask;
+import com.cookos.Utilits.OrderTask;
+import jakarta.persistence.criteria.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -163,15 +165,22 @@ public class ServerTask implements  Runnable {
     }
 
     private void operateOrder() throws Exception {
+        OrderTask orderTask = new OrderTask();
         try (var userDao = new DAO<>(User.class)) {
             var user = userDao.findByColumn("userID", userId);
             if (user != null) {
+
                 ostream.writeObject(user.getUserName());
                 ostream.flush();
                 ostream.writeObject(user.getUserSurname());
                 ostream.flush();
                 ostream.writeObject(user.getUserCity());
                 ostream.flush();
+
+                var shopList = orderTask.getAvailableProduct();
+                ostream.writeObject(shopList);
+
+
                 return;
             } else
                 ostream.writeObject("UserNotFound");

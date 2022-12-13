@@ -17,6 +17,7 @@ public class ClientMenuController {
     public Button deliveryPriceButton;
     public Button makeOrderButton;
     public Button watchOrderListButton;
+    public Button makeTicketButton;
 
     public void onClickWatchCatalog(ActionEvent event) throws IOException {
         Stage stage;
@@ -74,5 +75,17 @@ public class ClientMenuController {
         stage.show();
 
 
+    }
+
+
+    public void onMakeTicketButtonClick(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage = (Stage) makeTicketButton.getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/ClientTicketMenu.fxml")));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

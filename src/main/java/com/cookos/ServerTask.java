@@ -1,9 +1,6 @@
 package com.cookos;
 
-import com.cookos.Entities.Catalog;
-import com.cookos.Entities.Order;
-import com.cookos.Entities.Shop;
-import com.cookos.Entities.User;
+import com.cookos.Entities.*;
 import com.cookos.Patterns.DAO;
 import com.cookos.Utilits.CatalogTask;
 import com.cookos.Utilits.OrderTask;
@@ -69,6 +66,8 @@ public class ServerTask implements  Runnable {
                     placeOrder();
                 } else if (Objects.equals(listener, "WatchOrderList")) {
                     sendOrdersListToCLient();
+                } else if (Objects.equals(listener, "ClientWriteTicket")) {
+                    getClientTicket();
                 } else
                     System.out.println("Listener Error");
             } catch (Exception e) {
@@ -77,6 +76,7 @@ public class ServerTask implements  Runnable {
             }
         }
     }
+
 
     String commandListener() throws IOException, ClassNotFoundException {
         var choicer = (String) istream.readObject();
@@ -227,17 +227,36 @@ public class ServerTask implements  Runnable {
         try (var orderDAO = new DAO<>(Order.class);
              var shopDAO = new DAO<>(Shop.class);
              var catalogDAO = new DAO<>(Catalog.class);
-             var userDAO = new DAO<>(User.class))
-        {
-                var user = userDAO.findByColumn("userID", userId);
-                     if (user != null) {;
-                         ostream.writeObject(user.getOrders());
-                    }
-                     else
+             var userDAO = new DAO<>(User.class)) {
+            var user = userDAO.findByColumn("userID", userId);
+            if (user != null) {
+                ;
+                ostream.writeObject(user.getOrders());
+            } else
                 ostream.writeObject("UserNotFound");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-}
+
+    private void getClientTicket() throws IOException, ClassNotFoundException {
+        var text = (String) istream.readObject();
+
+
+
+        try (var userDAO = new DAO<>(User.class);
+             var messageDAO = new DAO<>(Message.class))
+            {
+                var user = userDAO.findByColumn("userID", userId);
+                if (user != null) {
+                    var message = new Message(0, text, "none", user);
+                    messageDAO.add(message);
+                }
+                else
+                    ostream.writeObject("UserNotFound");
+            }
+        catch(Exception e){
+                throw new RuntimeException(e);
+            }
+        }
+    }

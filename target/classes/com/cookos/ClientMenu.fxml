@@ -31,5 +31,10 @@
             <Font size="21.0" />
          </font>
       </Button>
+      <Button fx:id="makeTicketButton" layoutX="410.0" layoutY="323.0" mnemonicParsing="false" onAction="#onMakeTicketButtonClick" prefHeight="57.0" prefWidth="174.0" text="Send a ticket">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

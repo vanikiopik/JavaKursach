@@ -2,10 +2,33 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cookos.Controllers.AdminMenuController">
    <children>
-      <Button layoutX="70.0" layoutY="57.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="110.0" text="Manage catalog" />
+      <Button fx:id="addNewProductButton" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#onNewProductButtonClick" prefHeight="52.0" prefWidth="194.0" text="Add new product">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button fx:id="reviewTicketsButton" layoutX="423.0" layoutY="75.0" mnemonicParsing="false" onAction="#onReviewTicketsButton" prefHeight="52.0" prefWidth="163.0" text="Review tickets">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="exitButton" layoutX="22.0" layoutY="325.0" mnemonicParsing="false" onAction="#onExitButtonOrderClick" prefHeight="52.0" prefWidth="110.0" text="Exit">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="changeProductValueButton" layoutX="22.0" layoutY="75.0" mnemonicParsing="false" onAction="#onChangeProductValueButtonClick" prefHeight="52.0" prefWidth="224.0" text="Change product value">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="reviewOrdersButton" layoutX="423.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReviewOrdersButtonClick" prefHeight="52.0" prefWidth="163.0" text="Review orders">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

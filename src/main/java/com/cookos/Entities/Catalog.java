@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Catalog implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productID;
 
     @Column(name = "productName")

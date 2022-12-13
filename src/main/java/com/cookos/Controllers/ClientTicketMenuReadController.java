@@ -45,8 +45,6 @@ public class ClientTicketMenuReadController {
             messageIDs.add(s.getMessageID());
         }
         questionComboBox.setItems(messageIDs);
-
-
     }
 
     public void onBackButtonClick(ActionEvent event) throws IOException {

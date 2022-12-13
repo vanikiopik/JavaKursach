@@ -78,7 +78,6 @@ public class ClientMenuController {
 
     }
 
-
     public void onMakeTicketButtonClick(ActionEvent event) throws IOException {
         Stage stage;
         Parent root;

@@ -72,6 +72,9 @@ public class ServerTask implements  Runnable {
                 else if (Objects.equals(listener, "SendAllClientTickets")) {
                     sendUsersTicket();
                 }
+                else if (Objects.equals(listener, "AddingNewProduct")){
+                    addNewProduct();
+                }
                 else
                     System.out.println("Listener Error");
             } catch (Exception e) {
@@ -268,6 +271,21 @@ public class ServerTask implements  Runnable {
                 ostream.writeObject("UserNotFound");
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void addNewProduct() throws IOException, ClassNotFoundException {
+        var productName = (String)istream.readObject();
+        var productType = (String)istream.readObject();
+        var productPrice = (Float)istream.readObject();
+        var productAmount = (Integer) istream.readObject();
+
+        try (var shop = new DAO<>(Shop.class))
+        {
+            shop.add(new Shop(productName, productType, productPrice, productAmount));
+            }
+        catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
     }
 }

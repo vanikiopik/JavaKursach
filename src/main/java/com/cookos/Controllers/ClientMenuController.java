@@ -1,5 +1,6 @@
 package com.cookos.Controllers;
 
+import com.cookos.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +16,7 @@ public class ClientMenuController {
     public Button exitButton;
     public Button deliveryPriceButton;
     public Button makeOrderButton;
+    public Button watchOrderListButton;
 
     public void onClickWatchCatalog(ActionEvent event) throws IOException {
         Stage stage;
@@ -59,5 +61,18 @@ public class ClientMenuController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void onWatchOrderListButtonClick(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage = (Stage) watchOrderListButton.getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/OrderListWindow.fxml")));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+
     }
 }

@@ -15,6 +15,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -66,6 +67,8 @@ public class ServerTask implements  Runnable {
 
                 } else if (Objects.equals(listener, "PlaceOrder")) {
                     placeOrder();
+                } else if (Objects.equals(listener, "WatchOrderList")) {
+                    sendOrdersListToCLient();
                 } else
                     System.out.println("Listener Error");
             } catch (Exception e) {
@@ -200,20 +203,41 @@ public class ServerTask implements  Runnable {
         try (var shopDAO = new DAO<>(Shop.class);
              var orderDAO = new DAO<>(Order.class);
              var userDAO = new DAO<>(User.class)) {
-                 var user = userDAO.findByColumn("userID", userId);
-                 var shop = shopDAO.findByColumn("productName", productName);
+            var user = userDAO.findByColumn("userID", userId);
+            var shop = shopDAO.findByColumn("productName", productName);
 
-                 var order = new Order();
-                 order.setShop_Catalog_productID(shop);
-                 order.setUser_userID(user);
-                 order.setFinalPrice(finalPrice);
-                 order.setOrderDelivery(deliveryStatus);
-                 order.setOrderStatus("Review");
+            var order = new Order();
+            order.setShop_Catalog_productID(shop);
+            order.setUser_userID(user);
+            order.setFinalPrice(finalPrice);
+            order.setOrderDelivery(deliveryStatus);
+            order.setOrderStatus("Review");
 
-                 orderDAO.add(order);
+            orderDAO.add(order);
 
-                 shop.setAmount(shop.getAmount() - 1);
-                 shopDAO.update(shop);
-             }
+            shop.setAmount(shop.getAmount() - 1);
+            shopDAO.update(shop);
         }
     }
+
+    private void sendOrdersListToCLient() {
+        List<Order> ordersList = new ArrayList<>();
+
+
+        try (var orderDAO = new DAO<>(Order.class);
+             var shopDAO = new DAO<>(Shop.class);
+             var catalogDAO = new DAO<>(Catalog.class);
+             var userDAO = new DAO<>(User.class))
+        {
+                var user = userDAO.findByColumn("userID", userId);
+                     if (user != null) {;
+                         ostream.writeObject(user.getOrders());
+                    }
+                     else
+                ostream.writeObject("UserNotFound");
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

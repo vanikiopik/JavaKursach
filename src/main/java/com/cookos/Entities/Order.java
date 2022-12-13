@@ -47,4 +47,7 @@ public class Order implements Serializable {
         this.finalPrice = finalPrice;
         this.orderDelivery = deliveryStatus;
     }
+
+
+
 }

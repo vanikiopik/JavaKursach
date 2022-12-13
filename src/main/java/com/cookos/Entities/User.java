@@ -3,17 +3,26 @@ package com.cookos.Entities;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.hibernate.annotations.Fetch;
 
 import java.io.Serializable;
+import java.util.Set;
+
 @Data
 @Entity
-@Builder
 @Table(name = "users")
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany (mappedBy = "User_userID", fetch = FetchType.EAGER)
+    private Set<Order> orders;
 
     private String login;
 

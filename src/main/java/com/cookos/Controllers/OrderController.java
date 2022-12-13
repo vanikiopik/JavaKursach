@@ -104,6 +104,8 @@ public class OrderController {
             Client.ostream.writeObject(deliveryStatus);
             Client.ostream.flush();
 
+            reload();
+
 
         }
     }
@@ -156,6 +158,16 @@ public class OrderController {
         Parent root;
         stage = (Stage) backButton.getScene().getWindow();
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/ClientMenu.fxml")));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void reload() throws IOException {
+        Stage stage;
+        Parent root;
+        stage = (Stage) backButton.getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/Order.fxml")));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);

@@ -68,7 +68,11 @@ public class ServerTask implements  Runnable {
                     sendOrdersListToCLient();
                 } else if (Objects.equals(listener, "ClientWriteTicket")) {
                     getClientTicket();
-                } else
+                }
+                else if (Objects.equals(listener, "SendAllClientTickets")) {
+                    sendUsersTicket();
+                }
+                else
                     System.out.println("Listener Error");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -221,16 +225,9 @@ public class ServerTask implements  Runnable {
     }
 
     private void sendOrdersListToCLient() {
-        List<Order> ordersList = new ArrayList<>();
-
-
-        try (var orderDAO = new DAO<>(Order.class);
-             var shopDAO = new DAO<>(Shop.class);
-             var catalogDAO = new DAO<>(Catalog.class);
-             var userDAO = new DAO<>(User.class)) {
+        try (var userDAO = new DAO<>(User.class)) {
             var user = userDAO.findByColumn("userID", userId);
             if (user != null) {
-                ;
                 ostream.writeObject(user.getOrders());
             } else
                 ostream.writeObject("UserNotFound");
@@ -241,7 +238,6 @@ public class ServerTask implements  Runnable {
 
     private void getClientTicket() throws IOException, ClassNotFoundException {
         var text = (String) istream.readObject();
-
 
 
         try (var userDAO = new DAO<>(User.class);
@@ -259,4 +255,19 @@ public class ServerTask implements  Runnable {
                 throw new RuntimeException(e);
             }
         }
+
+    private void sendUsersTicket(){
+        try (var messageDAO = new DAO<>(Message.class);
+            var userDAO = new DAO<>(User.class))
+        {
+            var user = userDAO.findByColumn("userID", userId);
+            if (user != null) {
+                 ostream.writeObject(user.getMessages());
+            }
+            else
+                ostream.writeObject("UserNotFound");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+}

@@ -31,7 +31,12 @@
             <Font size="21.0" />
          </font>
       </Button>
-      <Button fx:id="makeTicketButton" layoutX="410.0" layoutY="323.0" mnemonicParsing="false" onAction="#onMakeTicketButtonClick" prefHeight="57.0" prefWidth="174.0" text="Send a ticket">
+      <Button fx:id="makeTicketButton" layoutX="396.0" layoutY="251.0" mnemonicParsing="false" onAction="#onMakeTicketButtonClick" prefHeight="57.0" prefWidth="174.0" text="Send a ticket">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="readAnswersButton" layoutX="396.0" layoutY="323.0" mnemonicParsing="false" onAction="#onReadAnsersButtonClick" prefHeight="57.0" prefWidth="174.0" text="Read answers">
          <font>
             <Font size="21.0" />
          </font>

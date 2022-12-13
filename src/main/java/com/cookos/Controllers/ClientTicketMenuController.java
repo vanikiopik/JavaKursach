@@ -46,7 +46,7 @@ public class ClientTicketMenuController {
 
             Client.ostream.writeObject(questionText.getText());
 
-
+            onBackButtonClick(null);
         }
     }
 }

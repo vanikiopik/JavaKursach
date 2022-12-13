@@ -45,41 +45,12 @@ public class CatalogController {
     private ObservableList<Shop> shopList = FXCollections.observableArrayList();
     private List<Shop> shopList2;
 
-    String query = null;
-    Connection con = null;
-    PreparedStatement ps = null;
-    ResultSet rs=  null;
-
-    @FXML
-    private void refreshTable() throws SQLException {
-        shopList.clear();
-        var query = "SELECT * FROM shop, catalog WHERE catalog.productID = Catalog_productId";
-        ps = con.prepareStatement(query);
-        rs = ps.executeQuery();
-
-        while (rs.next()){
-            shopList.add(new Shop(
-                    rs.getString("productName"),
-                    rs.getString("productType"),
-                    rs.getFloat("price"),
-                    rs.getInt("amount")));
-            shopTable.setItems(shopList);
-        }
-    }
 
     private void loadDateFromServer() throws IOException, ClassNotFoundException {
         shopList2 = (List<Shop>) Client.istream.readObject();
         shopList.addAll(shopList2);
     }
 
-    private void loadDate() throws SQLException, ClassNotFoundException {
-        con = DBConnect.getConnect();
-        refreshTable();
-        amountColumn.setCellValueFactory(new PropertyValueFactory<Shop, Integer>("amount"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Shop, String>("productName"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Shop, Float>("price"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<Shop, String>("productType"));
-    }
     @FXML
     private void initialize() throws SQLException, ClassNotFoundException, IOException {
         Client.ostream.writeObject("EnteringCatalog");
@@ -90,7 +61,6 @@ public class CatalogController {
         priceColumn.setCellValueFactory(new PropertyValueFactory<Shop, Float>("price"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<Shop, String>("productType"));
         shopTable.setItems(shopList);
-        //loadDate();
     }
 
     public void onBackMenuButtonClick(ActionEvent event) throws IOException {

@@ -24,6 +24,11 @@ public class User implements Serializable {
     @OneToMany (mappedBy = "User_userID", fetch = FetchType.EAGER)
     private Set<Order> orders;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany (mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Message> messages;
+
     private String login;
 
     private byte[] password;

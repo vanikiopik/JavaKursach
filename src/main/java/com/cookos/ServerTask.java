@@ -75,6 +75,12 @@ public class ServerTask implements  Runnable {
                 else if (Objects.equals(listener, "AddingNewProduct")){
                     addNewProduct();
                 }
+                else if (Objects.equals(listener, "SendingAllTicketsToReview")){
+                    reviewTickets();
+                }
+                else if (Objects.equals(listener, "AcceptAdminAnswer")) {
+                    acceptAdminAnswer();
+                }
                 else
                     System.out.println("Listener Error");
             } catch (Exception e) {
@@ -287,5 +293,39 @@ public class ServerTask implements  Runnable {
         catch (Exception ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    private void reviewTickets(){
+        try (var messageDAO = new DAO<>(Message.class);
+             var userDAO = new DAO<>(User.class))
+        {
+            var message = messageDAO.selectAll();
+            if (message != null) {
+                ostream.writeObject(message);
+            }
+            else
+                ostream.writeObject("UserNotFound");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void acceptAdminAnswer() throws IOException, ClassNotFoundException {
+        var Id = (Integer)istream.readObject();
+        var answer = (String)istream.readObject();
+
+        try (var messageDAO = new DAO<>(Message.class))
+        {
+            var message = messageDAO.findByColumn("messageID", Id);
+            if (message != null) {
+                message.setAnswer(answer);
+                messageDAO.update(message);
+            }
+            else
+                ostream.writeObject("UserNotFound");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

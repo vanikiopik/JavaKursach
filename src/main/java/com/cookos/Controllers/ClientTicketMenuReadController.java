@@ -30,15 +30,15 @@ public class ClientTicketMenuReadController {
 
     private ObservableList<Message> messageList = FXCollections.observableArrayList();
     private ObservableList<Integer> messageIDs = FXCollections.observableArrayList();
-    private ObservableList<String> messageAnswers = FXCollections.observableArrayList();
-    private ObservableList<String > messageQuestions = FXCollections.observableArrayList();
+
+    Set<Message> ticketsList = null;
 
     @FXML
     public void initialize() throws IOException, ClassNotFoundException {
         Client.ostream.writeObject("SendAllClientTickets");
 
-        var orderList = (Set<Message>)Client.istream.readObject();
-        for(var s : orderList){
+        ticketsList = (Set<Message>)Client.istream.readObject();
+        for(var s : ticketsList){
             messageList.add(s);
         }
         for (var s : messageList){
@@ -61,7 +61,11 @@ public class ClientTicketMenuReadController {
     }
 
     public void onSelectedValue(ActionEvent event) {
-        var choiceCity = questionComboBox.getSelectionModel().getSelectedItem().toString();
-
+        var choiceMessageId = (Integer)questionComboBox.getSelectionModel().getSelectedItem();
+        for (var s : ticketsList)
+            if(choiceMessageId == s.getMessageID()){
+                anwserTextArea.setText(s.getAnswer());
+                qustionTextArea.setText(s.getQuestion());
+            }
     }
 }

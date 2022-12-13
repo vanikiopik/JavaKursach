@@ -81,6 +81,9 @@ public class ServerTask implements  Runnable {
                 else if (Objects.equals(listener, "AcceptAdminAnswer")) {
                     acceptAdminAnswer();
                 }
+                else if (Objects.equals(listener, "SendOrdersToReview")) {
+                    sendOrdersToReview();
+                }
                 else
                     System.out.println("Listener Error");
             } catch (Exception e) {
@@ -327,5 +330,19 @@ public class ServerTask implements  Runnable {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void sendOrdersToReview(){
+        try (var orderDAO = new DAO<>(Order.class))
+        {
+            var orders = orderDAO.selectAll();
+            if (orders != null) {
+                ostream.writeObject(orders);
+            }
+            else
+                ostream.writeObject("UserNotFound");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

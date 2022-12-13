@@ -55,7 +55,14 @@ public class AdminMenuController {
 
     }
 
-    public void onReviewOrdersButtonClick(ActionEvent event) {
+    public void onReviewOrdersButtonClick(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage = (Stage) exitButton.getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/AdminReviewOrder.fxml")));
 
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

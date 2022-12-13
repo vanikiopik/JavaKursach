@@ -68,8 +68,29 @@ public class AdminReviewOrderController {
     public void onSelectedStatusValue(ActionEvent event) {
     }
 
-    public void onConfirmButtonClick(ActionEvent event) {
+    public void onConfirmButtonClick(ActionEvent event) throws IOException {
+        if(productNameField.getText().isBlank() |
+                productPriceField.getText().isBlank()){
+            return;
+        }
+        else{
+            Client.ostream.writeObject("AdminSendReviewedOrder");
 
+            Client.ostream.writeObject(chooseIdComboBox.getValue());
+            Client.ostream.flush();
+            Client.ostream.writeObject(reviewStatusComboBox.getValue());
+            Client.ostream.flush();
+
+            Stage stage;
+            Parent root;
+            stage = (Stage) backButton.getScene().getWindow();
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/AdminReviewOrder.fxml")));
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        }
     }
 
     public void onBackButtonClick(ActionEvent event) throws IOException {

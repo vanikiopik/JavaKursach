@@ -7,24 +7,24 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cookos.NetProfitController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cookos.Controllers.NetProfitController">
    <children>
       <Button fx:id="backButton" layoutX="14.0" layoutY="342.0" mnemonicParsing="false" onAction="#onBackButtonClick" text="Back">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Text layoutX="48.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Common orders price;">
+      <Text layoutX="38.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Common orders price:">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextArea fx:id="ordersPriceArea" editable="false" layoutX="263.0" layoutY="28.0" prefHeight="72.0" prefWidth="184.0" />
+      <TextArea fx:id="ordersPriceArea" editable="false" layoutX="263.0" layoutY="28.0" prefHeight="72.0" prefWidth="326.0" />
       <Text layoutX="14.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Net price after pay all taxes:">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <TextArea fx:id="nerPriceArea" editable="false" layoutX="263.0" layoutY="128.0" prefHeight="72.0" prefWidth="184.0" />
+      <TextArea fx:id="nerPriceArea" editable="false" layoutX="263.0" layoutY="128.0" prefHeight="72.0" prefWidth="326.0" />
    </children>
 </AnchorPane>

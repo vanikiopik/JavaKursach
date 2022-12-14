@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -29,8 +30,10 @@ public class OrderListWindowController {
     public TableColumn orderDeliveryColumn;
     public TableColumn priceColumn;
     public TableColumn reviewStatusColumn;
+
     public Button backButton;
     public TableView clientOrdersTable;
+    public Button saveButton;
 
     private ObservableList<OrderHelper> ordersList = FXCollections.observableArrayList();
 
@@ -62,5 +65,15 @@ public class OrderListWindowController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void onSaveTofileButton(ActionEvent event) throws IOException {
+        try(FileWriter writer = new FileWriter("abobus.txt", false))
+        {
+            for(var s : ordersList){
+                writer.write(s.toString());
+                writer.write("\n");
+            }
+        }
     }
 }

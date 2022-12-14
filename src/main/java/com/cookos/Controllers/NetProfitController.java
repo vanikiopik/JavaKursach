@@ -1,5 +1,6 @@
-package com.cookos;
+package com.cookos.Controllers;
 
+import com.cookos.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -17,6 +19,8 @@ public class NetProfitController {
     public Button backButton;
     public TextArea ordersPriceArea;
     public TextArea nerPriceArea;
+
+
 
     @FXML
     private void initialize() throws IOException, ClassNotFoundException {

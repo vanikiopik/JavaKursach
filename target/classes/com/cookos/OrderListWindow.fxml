@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cookos.Controllers.OrderListWindowController">
    <children>
       <TableView fx:id="clientOrdersTable" prefHeight="400.0" prefWidth="503.0">
@@ -19,6 +18,11 @@
         </columns>
       </TableView>
       <Button fx:id="backButton" layoutX="526.0" layoutY="354.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="32.0" prefWidth="60.0" text="Back">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="saveButton" layoutX="503.0" layoutY="305.0" mnemonicParsing="false" onAction="#onSaveTofileButton" prefHeight="32.0" prefWidth="97.0" text="Save to file">
          <font>
             <Font size="15.0" />
          </font>

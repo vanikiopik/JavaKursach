@@ -1,0 +1,4 @@
+OrderHelper(name=Iphone-XR, type=Smartphone, orderDelivery=No, price=1050.0, reviewStatus=Review)
+OrderHelper(name=Coca-Cola, type=Drink, orderDelivery=Yes, price=53.0, reviewStatus=Review)
+OrderHelper(name=RTX-3060, type=GPU, orderDelivery=Yes, price=133.0, reviewStatus=Accept)
+OrderHelper(name=Iphone-XR, type=Smartphone, orderDelivery=Yes, price=1100.0, reviewStatus=Accept)

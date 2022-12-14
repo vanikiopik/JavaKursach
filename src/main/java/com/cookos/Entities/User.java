@@ -67,4 +67,9 @@ public class User implements Serializable {
         this.userCity = userCity;
         this.isAdmin = isAdmin;
     }
+
+    public User(String login){
+        this.login = login;
+    }
+
 }

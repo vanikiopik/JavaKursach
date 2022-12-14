@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Getter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Catalog implements Serializable {
+public abstract class Catalog implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

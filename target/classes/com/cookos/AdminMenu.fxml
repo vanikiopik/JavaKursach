@@ -10,7 +10,7 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button fx:id="reviewTicketsButton" layoutX="423.0" layoutY="75.0" mnemonicParsing="false" onAction="#onReviewTicketsButton" prefHeight="52.0" prefWidth="163.0" text="Review tickets">
+      <Button fx:id="reviewTicketsButton" layoutX="422.0" layoutY="325.0" mnemonicParsing="false" onAction="#onReviewTicketsButton" prefHeight="52.0" prefWidth="163.0" text="Review tickets">
          <font>
             <Font size="20.0" />
          </font>
@@ -20,12 +20,17 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="changeProductValueButton" layoutX="22.0" layoutY="75.0" mnemonicParsing="false" onAction="#onChangeProductValueButtonClick" prefHeight="52.0" prefWidth="224.0" text="Change product value">
+      <Button fx:id="changeProductValueButton" layoutX="22.0" layoutY="75.0" mnemonicParsing="false" onAction="#onChangeProductValueButtonClick" opacity="0.0" prefHeight="52.0" prefWidth="224.0" text="Change product value">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="reviewOrdersButton" layoutX="423.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReviewOrdersButtonClick" prefHeight="52.0" prefWidth="163.0" text="Review orders">
+      <Button fx:id="reviewOrdersButton" layoutX="422.0" layoutY="264.0" mnemonicParsing="false" onAction="#onReviewOrdersButtonClick" prefHeight="52.0" prefWidth="163.0" text="Review orders">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="calculateNetProfitButton" layoutX="380.0" layoutY="14.0" mnemonicParsing="false" onAction="#onCalculateProfitButton" prefHeight="52.0" prefWidth="205.0" text="Calculate net profit">
          <font>
             <Font size="20.0" />
          </font>

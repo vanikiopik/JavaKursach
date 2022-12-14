@@ -38,7 +38,7 @@ public class ServerTask implements  Runnable {
             try {
                 listener = commandListener();
             } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
+                throw  new RuntimeException(e);
             }
             try {
                 //Try when login
@@ -86,6 +86,9 @@ public class ServerTask implements  Runnable {
                 }
                 else if (Objects.equals(listener, "AdminSendReviewedOrder")) {
                     changeOrderStatus();
+                }
+                else if (Objects.equals(listener, "PricesRequest")) {
+                    calculateOrdersPrices();
                 }
                 else
                     System.out.println("Listener Error");
@@ -359,6 +362,30 @@ public class ServerTask implements  Runnable {
             if (order != null) {
                 order.setOrderStatus(reviewStatus);
                 orderDao.update(order);
+            }
+            else
+                ostream.writeObject("UserNotFound");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void calculateOrdersPrices(){
+        List<Float> ordersPriceList = null;
+        float commonOrdersPrice = 0;
+        float netPrice = 0;
+        try (var orderDAO = new DAO<>(Order.class))
+        {
+            var orders = orderDAO.selectAll();
+            if (orders != null) {
+                for(var s : orders){
+                    commonOrdersPrice += s.getFinalPrice();
+                    netPrice += s.getFinalPrice() * 0.8;
+                }
+                ostream.writeObject(commonOrdersPrice);
+                ostream.flush();
+                ostream.writeObject(netPrice);
+                ostream.flush();
             }
             else
                 ostream.writeObject("UserNotFound");

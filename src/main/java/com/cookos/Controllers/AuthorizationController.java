@@ -28,6 +28,7 @@ public class AuthorizationController {
     public TextField loginField;
     public TextField passwordField;
     public Text wrongInputText;
+    public Button aboutApplicationButton;
 
     private String answer = null;
 
@@ -109,6 +110,17 @@ public class AuthorizationController {
         Parent root;
         stage = (Stage) RegisterButton.getScene().getWindow();
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/Registration.fxml")));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void onAboutApplicationButtonClick(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage = (Stage) aboutApplicationButton.getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/InfoAboutDevelopersWindow.fxml")));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);

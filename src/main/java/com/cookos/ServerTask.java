@@ -39,7 +39,7 @@ public class ServerTask implements  Runnable {
             try {
                 listener = commandListener();
             } catch (IOException | ClassNotFoundException e) {
-                throw  new RuntimeException(e);
+                throw new RuntimeException(e);
             }
             try {
                 //Try when login

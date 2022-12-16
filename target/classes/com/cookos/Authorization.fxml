@@ -28,5 +28,6 @@
          </font>
       </Text>
       <PasswordField fx:id="passwordField" layoutX="247.0" layoutY="260.0" promptText="Password" />
+      <Button fx:id="aboutApplicationButton" layoutX="14.0" layoutY="440.0" mnemonicParsing="false" onAction="#onAboutApplicationButtonClick" text="About application" />
    </children>
 </AnchorPane>

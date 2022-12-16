@@ -1,34 +1,36 @@
 package com.cookos.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 
-@Getter
-@AllArgsConstructor
-@Entity
+import java.io.Serializable;
 
-public class Catalog {
+@Getter
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Catalog implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productID;
 
+
+    @Column(name = "productName")
     private String productName;
 
+    @Column(name = "productType")
     private String productType;
 
-    public Catalog() {
-
-    }
 
     public Catalog(String productName, String productType) {
         this.productName = productName;
         this.productType = productType;
+    }
+
+
+    public Catalog() {
+
     }
 
 }

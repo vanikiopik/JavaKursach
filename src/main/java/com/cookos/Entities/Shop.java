@@ -1,22 +1,26 @@
 package com.cookos.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.io.Serializable;
+
 
 @Getter
 @Entity
-@Builder
-@AllArgsConstructor
-public class Shop extends Catalog {
-    @Id
-    private int Catalog_productID;
+@Setter
+@ToString(callSuper = true)
+@PrimaryKeyJoinColumn(name = "Catalog_productID")
+public class Shop extends Catalog implements Serializable {
 
+    @Column(name = "price")
     private float price;
 
+    @Column(name = "amount")
     private int amount;
 
     public Shop(String productName, String productType, float price, int amount) {
@@ -26,6 +30,6 @@ public class Shop extends Catalog {
     }
 
     public Shop() {
-
+        super();
     }
 }

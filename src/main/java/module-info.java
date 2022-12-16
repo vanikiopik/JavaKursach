@@ -11,8 +11,7 @@ module com.cookos {
 
     opens com.cookos to javafx.fxml;
     opens com.cookos.Controllers to javafx.fxml;
-    opens com.cookos.Entities to javafx.fxml, org.hibernate.orm.core;
-    //opens com.cookos.Entities to org.hibernate.orm.core;
+    opens com.cookos.Entities to org.hibernate.orm.core, javafx.fxml;
     exports com.cookos;
     exports com.cookos.Controllers;
     exports com.cookos.Entities;

@@ -3,17 +3,31 @@ package com.cookos.Entities;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.hibernate.annotations.Fetch;
 
 import java.io.Serializable;
+import java.util.Set;
+
 @Data
 @Entity
-@Builder
-@Table(name = "user")
+@Table(name = "users")
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany (mappedBy = "User_userID", fetch = FetchType.EAGER)
+    private Set<Order> orders;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany (mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Message> messages;
 
     private String login;
 
@@ -52,4 +66,9 @@ public class User implements Serializable {
         this.userCity = userCity;
         this.isAdmin = isAdmin;
     }
+
+    public User(String login){
+        this.login = login;
+    }
+
 }

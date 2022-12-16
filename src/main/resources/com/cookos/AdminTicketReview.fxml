@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cookos.Controllers.AdminTicketReviewController">
+   <children>
+      <ComboBox fx:id="ticketIDComboBox" layoutX="47.0" layoutY="44.0" onAction="#onSelectedValue" prefWidth="150.0" promptText="Choose ticket ID" />
+      <TextArea fx:id="questionTextArea" editable="false" layoutX="47.0" layoutY="119.0" prefHeight="200.0" prefWidth="200.0" promptText="Choose ID" wrapText="true" />
+      <TextArea fx:id="answerTextArea" layoutX="359.0" layoutY="119.0" prefHeight="200.0" prefWidth="200.0" promptText="Choose ID" wrapText="true" />
+      <Text layoutX="107.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="427.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Answer">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="342.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="10.0" prefWidth="80.0" text="Back">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="sendButton" layoutX="506.0" layoutY="342.0" mnemonicParsing="false" onAction="#onSendButtonClick" prefHeight="10.0" prefWidth="80.0" text="Send">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

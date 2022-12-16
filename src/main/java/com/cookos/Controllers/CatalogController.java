@@ -1,59 +1,87 @@
 package com.cookos.Controllers;
 
-import com.cookos.Entities.Catalog;
+import com.cookos.Client;
+import com.cookos.DBConnect.DBConnect;
 import com.cookos.Entities.Shop;
-import com.cookos.Entities.User;
-import com.cookos.bdConnector.DBHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableCell;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.hibernate.annotations.DialectOverride;
+import javafx.stage.Stage;
 
-import java.sql.*;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Objects;
 
 public class CatalogController {
+    public Button backButton;
+    public Button makeOrderButton;
+    @FXML
+    private TableColumn<Shop, Integer> amountColumn;
 
     @FXML
-    private TableView<Catalog> commonTable;
-
-    @FXML
-    private TableColumn<Shop, Integer> amountTable;
+    private TableColumn<Shop, String> nameColumn;
 
     @FXML
     private TableColumn<Shop, Float> priceColumn;
 
     @FXML
-    private TableColumn<Catalog, String> nameColumn;
+    private TableView<Shop> shopTable;
 
     @FXML
-    private TableColumn<Catalog, String> typeColumn;
+    private TableColumn<Shop, String> typeColumn;
 
-    private ObservableList<Catalog> shopList = FXCollections.observableArrayList();
+    private ObservableList<Shop> shopList = FXCollections.observableArrayList();
+    private List<Shop> shopList2;
 
 
-
-    @FXML
-    private void initialize() throws SQLException, ClassNotFoundException {
-        initData();
-
-        amountTable.setCellValueFactory(new PropertyValueFactory<Shop, Integer>("amount"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Shop, Float>("price"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Catalog, String >("productName"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<Catalog, String>("productType"));
-
-        commonTable.setItems(shopList);
+    private void loadDateFromServer() throws IOException, ClassNotFoundException {
+        shopList2 = (List<Shop>) Client.istream.readObject();
+        shopList.addAll(shopList2);
     }
 
-    private void initData(){
+    @FXML
+    private void initialize() throws SQLException, ClassNotFoundException, IOException {
+        Client.ostream.writeObject("EnteringCatalog");
+        loadDateFromServer();
 
-        shopList.add(new Shop("Iphone 14", "Smartphone", 1400, 2));
-        shopList.add(new Shop("Iphone XR", "Smartphone", 1200, 5));
-        shopList.add(new Shop("Cort G110", "Guitar", 40, 3));
+        amountColumn.setCellValueFactory(new PropertyValueFactory<Shop, Integer>("amount"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Shop, String>("productName"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<Shop, Float>("price"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<Shop, String>("productType"));
+        shopTable.setItems(shopList);
+    }
 
+    public void onBackMenuButtonClick(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage = (Stage) backButton.getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/ClientMenu.fxml")));
 
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void onClickOrderButton(ActionEvent event) throws IOException {
+        Stage stage;
+        Parent root;
+        stage = (Stage) makeOrderButton.getScene().getWindow();
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/cookos/Order.fxml")));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

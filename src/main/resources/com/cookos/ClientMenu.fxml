@@ -2,10 +2,44 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cookos.Controllers.ClientMenuController">
    <children>
-      <Button layoutX="36.0" layoutY="31.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="152.0" text="Просмотреть каталог" />
+      <Button fx:id="watchCatalogButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickWatchCatalog" prefHeight="74.0" prefWidth="177.0" text="Watch catalog">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="exitButton" layoutX="14.0" layoutY="319.0" mnemonicParsing="false" onAction="#onClickExitButton" prefHeight="66.0" prefWidth="83.0" text="Exit">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="deliveryPriceButton" layoutX="354.0" layoutY="14.0" mnemonicParsing="false" onAction="#onDeliveryPriceClickButton" prefHeight="74.0" prefWidth="232.0" text="Watch delivery price">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="makeOrderButton" layoutX="15.0" layoutY="108.0" mnemonicParsing="false" onAction="#onMakeOrderButtonClick" text="Make order">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Button>
+      <Button fx:id="watchOrderListButton" layoutX="353.0" layoutY="99.0" mnemonicParsing="false" onAction="#onWatchOrderListButtonClick" prefHeight="74.0" prefWidth="232.0" text="Watch your order list">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="makeTicketButton" layoutX="396.0" layoutY="251.0" mnemonicParsing="false" onAction="#onMakeTicketButtonClick" prefHeight="57.0" prefWidth="174.0" text="Send a ticket">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="readAnswersButton" layoutX="396.0" layoutY="323.0" mnemonicParsing="false" onAction="#onReadAnsersButtonClick" prefHeight="57.0" prefWidth="174.0" text="Read answers">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

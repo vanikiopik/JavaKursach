@@ -59,6 +59,7 @@ public class AuthorizationController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
     }
 
         public void submit() throws IOException, NoSuchAlgorithmException {

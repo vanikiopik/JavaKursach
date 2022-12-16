@@ -1,5 +1,6 @@
 package com.cookos.Entities;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -31,5 +32,4 @@ public class Shop extends Catalog implements Serializable {
     public Shop() {
         super();
     }
-
 }

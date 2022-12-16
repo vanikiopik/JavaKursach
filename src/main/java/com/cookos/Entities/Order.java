@@ -1,5 +1,6 @@
 package com.cookos.Entities;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -47,7 +48,4 @@ public class Order implements Serializable {
         this.finalPrice = finalPrice;
         this.orderDelivery = deliveryStatus;
     }
-
-
-
 }
